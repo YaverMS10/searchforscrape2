@@ -61,24 +61,38 @@ def scrape(features_dict, page):
         except:
             page.add(ft.Text("No Instagram item found for this filter"))
 
-    status_text_tapaz.value = ""
-    status_text_instagram.value = ""
+    try:
+        status_text_tapaz.value = ""
+    except:
+        pass
+
+    try:
+        status_text_instagram.value = ""
+    except:
+        pass
+
+    try:
+        status_text_binaaz.value = ""
+    except:
+        pass
+    
     page.update()
 
 
 def button_clicked(e):
     global tb
     user_input = tb.value
-        # response = openai.ChatCompletion.create(
-        #         model="gpt-4o-mini",
-        #         messages=[{"role": "system", "content": instruction},
-        #                 {"role": "user", "content": user_input}])
-        # features_dict = ast.literal_eval(response['choices'][0]['message']['content'])
-    features_dict = {"category": "house", "type": "Menzil", "price_max": 50000, "price_min": 46000}
-    scrape(features_dict, e.page)
-    # except:
-    #     e.page.add(ft.Text("OpenAI Error"))
-    #     e.page.update()
+    try:
+        response = openai.ChatCompletion.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "system", "content": instruction},
+                        {"role": "user", "content": user_input}])
+        features_dict = ast.literal_eval(response['choices'][0]['message']['content'])
+        print(features_dict)
+        scrape(features_dict, e.page)
+    except:
+        e.page.add(ft.Text("OpenAI Error"))
+        e.page.update()
 
 def main(page:ft.Page):
     global tb

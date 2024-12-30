@@ -18,6 +18,7 @@ from urllib.parse import urlparse, parse_qs
 from selenium.webdriver.common.keys import Keys
 
 def scrape(filtered_url):
+    print(filtered_url)
 
     def extract_price(link_soup):
         try:

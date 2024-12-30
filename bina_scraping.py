@@ -228,6 +228,7 @@ def parse(filtered_url):
                     break
 
                 url = filtered_url.split("page")[0] + f"page={page}" + filtered_url.split("page")[1]
+                print(url)
                 service = ChromeService(ChromeDriverManager().install(), log_path=os.devnull)
                 driver = webdriver.Chrome(service=service, options=chrome_options)
                 driver.get(url)
